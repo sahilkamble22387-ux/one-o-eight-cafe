@@ -13,84 +13,52 @@ import {
   Menu,
   X,
   Star,
-  Flame,
-  Moon,
+  BookOpen,
+  Music,
+  Palette,
+  Waves,
   Sun,
   Utensils,
-  Sandwich,
-  Egg,
-  Soup,
   Bike,
   Users,
-  ExternalLink,
-  ArrowRight,
+  TreePalm,
   Sparkles,
-  Cookie,
+  Guitar,
+  Armchair,
+  Baby,
+  ArrowRight,
 } from "lucide-react";
 
-/* ─── Steam Particles for Hero ─── */
-function FloatingSteam() {
-  const steamItems = [
-    { left: "10%", bottom: "20%", delay: 0, class: "steam-1" },
-    { left: "30%", bottom: "15%", delay: 1, class: "steam-2" },
-    { left: "50%", bottom: "25%", delay: 2, class: "steam-3" },
-    { left: "70%", bottom: "10%", delay: 0.5, class: "steam-4" },
-    { left: "85%", bottom: "18%", delay: 1.5, class: "steam-5" },
-    { left: "20%", bottom: "30%", delay: 2.5, class: "steam-6" },
+/* ─── Floating Bubbles (Beach Vibe) ─── */
+function FloatingBubbles() {
+  const bubbles = [
+    { left: "8%", bottom: "15%", size: 10, class: "bubble-1", color: "bg-ocean/20" },
+    { left: "22%", bottom: "20%", size: 8, class: "bubble-2", color: "bg-sunflower/20" },
+    { left: "40%", bottom: "12%", size: 12, class: "bubble-3", color: "bg-ocean/15" },
+    { left: "58%", bottom: "25%", size: 7, class: "bubble-4", color: "bg-coral/15" },
+    { left: "75%", bottom: "18%", size: 9, class: "bubble-5", color: "bg-ocean/20" },
+    { left: "88%", bottom: "22%", size: 6, class: "bubble-1", color: "bg-sunflower/15" },
   ];
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {steamItems.map((item, i) => (
+      {bubbles.map((b, i) => (
         <div
           key={i}
-          className={`absolute ${item.class}`}
+          className={`absolute ${b.class} ${b.color} rounded-full blur-[1px]`}
           style={{
-            left: item.left,
-            bottom: item.bottom,
-            animationDelay: `${item.delay}s`,
+            left: b.left,
+            bottom: b.bottom,
+            width: b.size,
+            height: b.size,
           }}
-        >
-          <div className="w-3 h-3 rounded-full bg-gold/20 blur-sm" />
-        </div>
+        />
       ))}
     </div>
   );
 }
 
-/* ─── Spice Particles ─── */
-function FloatingSpices() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div
-        className="absolute spice-float-1 text-gold/10 text-2xl"
-        style={{ left: "15%", bottom: "10%" }}
-      >
-        ✦
-      </div>
-      <div
-        className="absolute spice-float-2 text-spice/10 text-xl"
-        style={{ left: "45%", bottom: "20%" }}
-      >
-        ✦
-      </div>
-      <div
-        className="absolute spice-float-3 text-gold/10 text-lg"
-        style={{ left: "75%", bottom: "15%" }}
-      >
-        ✦
-      </div>
-      <div
-        className="absolute spice-float-4 text-maroon/8 text-2xl"
-        style={{ left: "60%", bottom: "25%" }}
-      >
-        ✦
-      </div>
-    </div>
-  );
-}
-
-/* ─── Section Reveal Wrapper ─── */
+/* ─── Section Reveal ─── */
 function RevealSection({
   children,
   className = "",
@@ -117,52 +85,11 @@ function RevealSection({
   );
 }
 
-/* ─── Animated Counter ─── */
-function AnimatedCounter({
-  target,
-  suffix = "",
-  prefix = "",
-}: {
-  target: number;
-  suffix?: string;
-  prefix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    let current = 0;
-    const increment = target / 50;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, 30);
-    return () => clearInterval(timer);
-  }, [isInView, target]);
-
+/* ─── Boho Divider ─── */
+function BohoDivider({ className = "" }: { className?: string }) {
   return (
-    <span ref={ref} className="tabular-nums">
-      {prefix}
-      {count}
-      {suffix}
-    </span>
-  );
-}
-
-/* ─── Ornamental Divider (Arabesque inspired) ─── */
-function ArabesqueDivider() {
-  return (
-    <div className="flex items-center justify-center gap-3 mb-4">
-      <div className="section-separator" />
-      <div className="text-gold text-lg">✦</div>
-      <div className="section-separator" />
+    <div className={`boho-divider ${className}`}>
+      <span className="text-ocean text-sm">~</span>
     </div>
   );
 }
@@ -180,9 +107,9 @@ function Navbar() {
 
   const links = [
     { label: "Home", href: "#home" },
-    { label: "Our Story", href: "#story" },
+    { label: "Our Vibe", href: "#story" },
     { label: "Menu", href: "#menu" },
-    { label: "Late Night", href: "#latenight" },
+    { label: "Experiences", href: "#experiences" },
     { label: "Visit Us", href: "#visit" },
   ];
 
@@ -193,50 +120,47 @@ function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-cream/95 backdrop-blur-md shadow-lg shadow-espresso/5"
+          ? "bg-sand/95 backdrop-blur-md shadow-lg shadow-deep-sea/5"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
           <a href="#home" className="flex items-center gap-2.5 group">
             <motion.div whileHover={{ rotate: [0, -5, 5, 0] }} transition={{ duration: 0.5 }}>
-              <Coffee size={26} className="text-gold" />
+              <TreePalm size={26} className="text-ocean" />
             </motion.div>
             <div className="flex flex-col">
-              <span className="font-display text-xl sm:text-2xl font-bold text-espresso leading-tight">
-                Cafe Ibrahim
+              <span className="font-display text-xl sm:text-2xl text-deep-sea leading-tight">
+                Mhuzo Goa
               </span>
-              <span className="text-[10px] tracking-[0.25em] font-body font-semibold text-maroon uppercase">
-                Est. Viman Nagar
+              <span className="text-[9px] tracking-[0.25em] font-body font-semibold text-coral uppercase">
+                Book Cafe • FC Road
               </span>
             </div>
           </a>
 
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-body font-semibold text-espresso/70 hover:text-maroon transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-maroon after:transition-all after:duration-300 hover:after:w-full"
+                className="text-sm font-body font-semibold text-driftwood/70 hover:text-ocean transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-ocean after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="tel:8551061614"
-              className="bg-maroon hover:bg-maroon-dark text-warm-white px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-maroon/20"
+              href="tel:9511898593"
+              className="bg-ocean hover:bg-ocean-dark text-seashell px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-ocean/20 font-body"
             >
-              Order Now
+              Reserve a Spot
             </a>
           </div>
 
-          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-espresso"
+            className="md:hidden p-2 text-deep-sea"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -244,13 +168,11 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-cream/98 backdrop-blur-lg border-t border-sand"
+          className="md:hidden bg-sand/98 backdrop-blur-lg border-t border-hammock"
         >
           <div className="px-6 py-4 space-y-3">
             {links.map((link) => (
@@ -258,16 +180,16 @@ function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block py-2 text-espresso/80 hover:text-maroon font-semibold transition-colors font-body"
+                className="block py-2 text-deep-sea/80 hover:text-ocean font-semibold transition-colors font-body"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="tel:8551061614"
-              className="block text-center bg-maroon text-warm-white py-3 rounded-full font-bold mt-2 font-body"
+              href="tel:9511898593"
+              className="block text-center bg-ocean text-seashell py-3 rounded-full font-bold mt-2 font-body"
             >
-              Order Now
+              Reserve a Spot
             </a>
           </div>
         </motion.div>
@@ -284,35 +206,29 @@ function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
       <motion.div className="absolute inset-0" style={{ y }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/ibrahim/hero.png')" }}
+          style={{ backgroundImage: "url('/images/mhuzo/hero.png')" }}
         />
-        <div className="hero-gradient-ibrahim absolute inset-0" />
+        <div className="hero-gradient-mhuzo absolute inset-0" />
       </motion.div>
 
-      <FloatingSteam />
-      <FloatingSpices />
+      <FloatingBubbles />
 
-      {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto"
-      >
-        {/* 24 Hours Badge */}
+      <motion.div style={{ opacity }} className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+        {/* Beach Badge */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className="inline-flex items-center gap-2 bg-warm-white/15 backdrop-blur-sm border border-gold/30 rounded-full px-5 py-2 mb-6 hour-glow"
+          className="inline-flex items-center gap-2 bg-seashell/15 backdrop-blur-sm border border-sunflower/30 rounded-full px-5 py-2 mb-6"
         >
-          <Moon size={14} className="text-gold-light" />
-          <span className="text-warm-white/90 text-sm font-body font-bold tracking-wide">
-            Open 24 Hours
+          <TreePalm size={14} className="text-sunflower-light" />
+          <span className="text-seashell/90 text-sm font-body font-bold tracking-wide">
+            Pune&apos;s Favourite Goan Book Cafe
           </span>
-          <Sun size={14} className="text-gold-light" />
+          <Waves size={14} className="text-ocean-light" />
         </motion.div>
 
         {/* Main Heading */}
@@ -320,35 +236,30 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-warm-white text-shadow-warm leading-[1.1] mb-4"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-seashell text-shadow-warm leading-[1.1] mb-3"
         >
-          Cafe Ibrahim
+          Cafe Mhuzo Goa
         </motion.h1>
 
-        {/* Arabic-style subtitle */}
-        <motion.div
+        {/* Konkani Subtitle */}
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex items-center justify-center gap-4 mb-4"
+          className="font-body text-sunflower-light text-lg sm:text-xl tracking-[0.15em] uppercase mb-6"
         >
-          <div className="w-12 h-[1px] bg-gold/50" />
-          <span className="font-display text-xl sm:text-2xl text-gold tracking-wider">
-            ✦ AUTHENTIC ✦ IRANI ✦ CAFE ✦
-          </span>
-          <div className="w-12 h-[1px] bg-gold/50" />
-        </motion.div>
+          &ldquo;Mhuzo Goa&rdquo; — My Goa in Konkani
+        </motion.p>
 
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="font-body text-lg sm:text-xl text-warm-white/75 max-w-2xl mx-auto mb-8 leading-relaxed"
+          className="font-body text-lg sm:text-xl text-seashell/70 max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          Where the aroma of Irani chai meets the warmth of freshly baked bun maska.
-          <br className="hidden sm:block" />
-          Late night cravings? We never close.
+          Beach vibes, bunk beds & books on FC Road. Swings, bean bags, and
+          the best grilled sandwiches in town. Your Goan escape, right here in Pune.
         </motion.p>
 
         {/* CTAs */}
@@ -360,17 +271,17 @@ function Hero() {
         >
           <a
             href="#menu"
-            className="bg-maroon hover:bg-maroon-dark text-warm-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-maroon/30 pulse-glow-maroon flex items-center gap-2 font-body"
+            className="bg-ocean hover:bg-ocean-dark text-seashell px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-ocean/30 pulse-glow-ocean flex items-center gap-2 font-body"
           >
             <Utensils size={20} />
             Explore Menu
           </a>
           <a
-            href="tel:8551061614"
-            className="bg-warm-white/15 hover:bg-warm-white/25 backdrop-blur-sm border border-warm-white/30 text-warm-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2 font-body"
+            href="#experiences"
+            className="bg-seashell/15 hover:bg-seashell/25 backdrop-blur-sm border border-seashell/30 text-seashell px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2 font-body"
           >
-            <Phone size={20} className="text-gold-light" />
-            Call to Order
+            <BookOpen size={20} className="text-sunflower-light" />
+            Discover Experiences
           </a>
         </motion.div>
 
@@ -382,16 +293,15 @@ function Hero() {
           className="mt-12 flex justify-center gap-8 sm:gap-12"
         >
           {[
-            { value: "24", suffix: " Hrs", label: "Always Open" },
-            { value: "₹200", suffix: "", label: "For Two" },
-            { value: "4.6", suffix: "★", label: "JustDial" },
+            { value: "4.7★", label: "JustDial" },
+            { value: "774+", label: "Reviews" },
+            { value: "₹800", label: "For Two" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="font-display text-2xl sm:text-3xl font-bold text-gold">
+              <div className="font-display text-2xl sm:text-3xl font-bold text-sunflower">
                 {stat.value}
-                {stat.suffix}
               </div>
-              <div className="font-body text-xs sm:text-sm text-warm-white/50 mt-1">
+              <div className="font-body text-xs sm:text-sm text-seashell/45 mt-1">
                 {stat.label}
               </div>
             </div>
@@ -399,100 +309,82 @@ function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator"
       >
-        <ChevronDown size={28} className="text-warm-white/40" />
+        <ChevronDown size={28} className="text-seashell/40" />
       </motion.div>
     </section>
   );
 }
 
-/* ─── Our Story Section ─── */
-function OurStory() {
+/* ─── Our Vibe / Story Section ─── */
+function OurVibe() {
   return (
-    <RevealSection id="story" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-cream relative">
-      <div className="mosaic-pattern absolute inset-0 pointer-events-none" />
+    <RevealSection id="story" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-sand relative">
+      <div className="wave-pattern absolute inset-0 pointer-events-none" />
       <div className="max-w-7xl mx-auto relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Images */}
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                className="rounded-2xl overflow-hidden shadow-xl row-span-2"
-              >
-                <img
-                  src="/images/ibrahim/irani-chai.png"
-                  alt="Irani Chai at Cafe Ibrahim"
-                  className="w-full h-full object-cover"
-                />
+              <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden shadow-xl row-span-2">
+                <img src="/images/mhuzo/swings.png" alt="Swings at Cafe Mhuzo Goa" className="w-full h-full object-cover" />
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="/images/ibrahim/shawarma.png"
-                  alt="Chicken Shawarma at Cafe Ibrahim"
-                  className="w-full h-48 object-cover"
-                />
+                <img src="/images/mhuzo/books.png" alt="Book corner at Cafe Mhuzo Goa" className="w-full h-48 object-cover" />
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="/images/ibrahim/exterior.png"
-                  alt="Cafe Ibrahim Exterior"
-                  className="w-full h-48 object-cover"
-                />
+                <img src="/images/mhuzo/bunkbeds.png" alt="Bunk beds at Cafe Mhuzo Goa" className="w-full h-48 object-cover" />
               </motion.div>
             </div>
-            {/* Decorative accent */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl -z-10" />
-            <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-maroon/15 rounded-xl -z-10" />
+            {/* Decorative */}
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-sunflower/20 rounded-2xl -z-10" />
+            <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-ocean/15 rounded-xl -z-10" />
           </div>
 
           {/* Right: Story */}
           <div>
-            <ArabesqueDivider />
-            <div className="text-center sm:text-left mb-2">
-              <span className="font-body text-sm font-bold text-maroon tracking-[0.15em] uppercase">
-                Our Story
-              </span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-espresso mb-6 leading-tight text-center sm:text-left">
-              Where Every Cup
+            <BohoDivider className="mb-4 justify-start sm:justify-start" />
+            <span className="font-body text-sm font-bold text-ocean tracking-[0.15em] uppercase">
+              Our Vibe
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-deep-sea mt-2 mb-6 leading-tight">
+              A Little Piece of Goa
               <br />
-              <span className="text-maroon">Tells a Story</span>
+              <span className="text-coral">on FC Road</span>
             </h2>
-            <p className="font-body text-espresso/65 text-lg leading-relaxed mb-6">
-              Nestled in the heart of Viman Nagar, <strong className="text-espresso">Cafe Ibrahim</strong> is
-              more than just a cafe — it&apos;s a late-night haven for those who believe that great food
-              shouldn&apos;t have a curfew. Inspired by the timeless Irani cafe tradition, we serve
-              authentic flavors that have been loved for generations.
+            <p className="font-body text-driftwood text-lg leading-relaxed mb-6">
+              &ldquo;Mhuzo Goa&rdquo; means <strong className="text-deep-sea">&ldquo;My Goa&rdquo;</strong> in
+              Konkani — and that&apos;s exactly what we&apos;ve created. A hidden
+              beach shack tucked away from Pune&apos;s hustle, where you can sink
+              into a swing, curl up on a bunk bed with a book, or dip your
+              toes in our mini foot pool.
             </p>
-            <p className="font-body text-espresso/65 text-lg leading-relaxed mb-8">
-              From the first sip of our legendary <strong className="text-maroon">Irani Chai</strong> to the
-              last bite of our perfectly spiced <strong className="text-maroon">Chicken Shawarma</strong>, every
-              dish at Cafe Ibrahim is made with love, fresh ingredients, and recipes that honor the
-              Irani cafe heritage.
+            <p className="font-body text-driftwood text-lg leading-relaxed mb-8">
+              Our decor is <strong className="text-palm">&ldquo;best out of waste&rdquo;</strong> — vibrant,
+              sustainable, and full of character. Every corner tells a story,
+              every cushion invites you to stay a little longer.
             </p>
 
-            {/* Key Values */}
+            {/* Features Grid */}
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Moon, label: "Open 24 Hours", desc: "Always here for you" },
-                { icon: Flame, label: "Authentic Flavors", desc: "Irani cafe heritage" },
-                { icon: Heart, label: "Made with Love", desc: "Fresh ingredients daily" },
-                { icon: Star, label: "4.6★ Rated", desc: "Loved by Punekars" },
+                { icon: Armchair, label: "Swings & Bean Bags", desc: "Sit how you like" },
+                { icon: BookOpen, label: "Books for All Ages", desc: "Get lost in stories" },
+                { icon: Guitar, label: "Free Guitars", desc: "Pick up & play" },
+                { icon: Heart, label: "Pet Friendly", desc: "Furry friends welcome" },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-warm-white/60">
-                  <div className="p-2 rounded-lg bg-maroon/10 shrink-0">
-                    <item.icon size={18} className="text-maroon" />
+                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-seashell/60">
+                  <div className="p-2 rounded-lg bg-ocean/10 shrink-0">
+                    <item.icon size={18} className="text-ocean" />
                   </div>
                   <div>
-                    <div className="font-body font-bold text-espresso text-sm">{item.label}</div>
-                    <div className="font-body text-xs text-espresso/45">{item.desc}</div>
+                    <div className="font-body font-bold text-deep-sea text-sm">{item.label}</div>
+                    <div className="font-body text-xs text-driftwood/60">{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -506,145 +398,37 @@ function OurStory() {
 
 /* ─── Menu Section ─── */
 function MenuSection() {
-  const [activeTab, setActiveTab] = useState<
-    "breakfast" | "mains" | "shawarma" | "beverages"
-  >("breakfast");
+  const [activeTab, setActiveTab] = useState<"bites" | "mains" | "drinks">("bites");
 
   const menuData = {
-    breakfast: {
-      title: "All Day Breakfast",
-      icon: Egg,
+    bites: {
+      title: "Quick Bites",
+      icon: Sparkles,
       items: [
-        {
-          name: "Bun Maska Jam",
-          desc: "Soft pav with butter & jam — the Irani classic",
-          price: "₹80",
-          img: "/images/ibrahim/bun-maska.png",
-          tag: "Must Try",
-        },
-        {
-          name: "Masala Omelette",
-          desc: "Fluffy eggs with green chilies, onions & spices",
-          price: "₹90",
-          img: "/images/ibrahim/omelette.png",
-          tag: "Popular",
-        },
-        {
-          name: "Chicken Keema Paratha",
-          desc: "Spiced minced chicken with flaky alishan paratha",
-          price: "₹150",
-          img: "/images/ibrahim/kheema.png",
-          tag: "Bestseller",
-        },
-        {
-          name: "Cheese Omelette",
-          desc: "Golden omelette loaded with melted cheese",
-          price: "₹110",
-          img: "/images/ibrahim/omelette.png",
-          tag: "",
-        },
+        { name: "Cheesy Peri Peri Fries", desc: "Loaded fries with peri peri & melted cheese", price: "₹160", img: "/images/mhuzo/fries.png", tag: "Bestseller" },
+        { name: "French Fries (Salted)", desc: "Crispy golden fries with salt & pepper seasoning", price: "₹120", img: "/images/mhuzo/fries.png", tag: "" },
+        { name: "Grilled Sandwich", desc: "Hot & cheesy grilled sandwich with fresh veggies", price: "₹140", img: "/images/mhuzo/sandwich.png", tag: "Must Try" },
+        { name: "Cheese Thalipeeth", desc: "Traditional multigrain flatbread with cheese", price: "₹140", img: "/images/mhuzo/sandwich.png", tag: "Healthy" },
       ],
     },
     mains: {
       title: "Mains & More",
-      icon: Soup,
+      icon: Utensils,
       items: [
-        {
-          name: "Chicken Biryani",
-          desc: "Aromatic basmati rice with tender chicken & saffron",
-          price: "₹180",
-          img: "/images/ibrahim/biryani.png",
-          tag: "Bestseller",
-        },
-        {
-          name: "Chicken Kheema Pav",
-          desc: "Spiced minced chicken served with soft pav",
-          price: "₹140",
-          img: "/images/ibrahim/kheema.png",
-          tag: "Must Try",
-        },
-        {
-          name: "Masala Maggi",
-          desc: "Spiced noodles — the ultimate comfort food",
-          price: "₹65",
-          img: "/images/ibrahim/maggi.png",
-          tag: "Comfort",
-        },
-        {
-          name: "Jumbo Crunchy Burger",
-          desc: "Crispy patty with fresh veggies in a jumbo bun",
-          price: "₹130",
-          img: "/images/ibrahim/burger.png",
-          tag: "Popular",
-        },
+        { name: "Artisan Pizza", desc: "Hand-tossed pizza with fresh toppings & mozzarella", price: "₹250", img: "/images/mhuzo/pizza.png", tag: "Popular" },
+        { name: "Cheese Omelette Wrap", desc: "Fluffy omelette with cheese wrapped in a tortilla", price: "₹160", img: "/images/mhuzo/sandwich.png", tag: "" },
+        { name: "Pasta Alfredo", desc: "Creamy white sauce pasta with herbs & parmesan", price: "₹220", img: "/images/mhuzo/pizza.png", tag: "" },
+        { name: "Masala Omelette", desc: "Spiced egg omelette with green chilies & onions", price: "₹100", img: "/images/mhuzo/sandwich.png", tag: "Classic" },
       ],
     },
-    shawarma: {
-      title: "Shawarma & Rolls",
-      icon: Sandwich,
-      items: [
-        {
-          name: "Classic Chicken Shawarma",
-          desc: "Tender chicken in pita with garlic sauce & veggies",
-          price: "₹120",
-          img: "/images/ibrahim/shawarma.png",
-          tag: "Bestseller",
-        },
-        {
-          name: "Peri Peri Shawarma",
-          desc: "Spicy peri peri chicken shawarma with special sauce",
-          price: "₹140",
-          img: "/images/ibrahim/shawarma.png",
-          tag: "Spicy",
-        },
-        {
-          name: "Cheese Shawarma",
-          desc: "Classic shawarma loaded with melted cheese",
-          price: "₹150",
-          img: "/images/ibrahim/shawarma.png",
-          tag: "Cheesy",
-        },
-        {
-          name: "Shawarma Roll",
-          desc: "Chicken shawarma wrapped in a roomali roti",
-          price: "₹100",
-          img: "/images/ibrahim/shawarma.png",
-          tag: "Value",
-        },
-      ],
-    },
-    beverages: {
-      title: "Chai & Beverages",
+    drinks: {
+      title: "Drinks & Shakes",
       icon: Coffee,
       items: [
-        {
-          name: "Irani Chai",
-          desc: "Rich, creamy, slow-brewed — the legendary cup",
-          price: "₹40",
-          img: "/images/ibrahim/irani-chai.png",
-          tag: "Legendary",
-        },
-        {
-          name: "Masala Chai",
-          desc: "Spiced tea with cardamom, ginger & cloves",
-          price: "₹40",
-          img: "/images/ibrahim/irani-chai.png",
-          tag: "Classic",
-        },
-        {
-          name: "Cold Coffee",
-          desc: "Chilled blended coffee — perfect for Pune summers",
-          price: "₹90",
-          img: "/images/ibrahim/irani-chai.png",
-          tag: "",
-        },
-        {
-          name: "Cookie & Chai Combo",
-          desc: "Fresh-baked cookie paired with Irani chai",
-          price: "₹80",
-          img: "/images/ibrahim/bun-maska.png",
-          tag: "Combo",
-        },
+        { name: "Tropical Smoothie Bowl", desc: "Acai bowl with mango, granola & coconut flakes", price: "₹220", img: "/images/mhuzo/smoothie-bowl.png", tag: "Insta-worthy" },
+        { name: "Chocolate Shake", desc: "Thick creamy milkshake with whipped cream", price: "₹180", img: "/images/mhuzo/shake.png", tag: "Popular" },
+        { name: "Artisan Cappuccino", desc: "Rich espresso with velvety steamed milk foam", price: "₹160", img: "/images/mhuzo/coffee.png", tag: "" },
+        { name: "Irani Chai", desc: "Slow-brewed creamy tea — the classic comfort cup", price: "₹50", img: "/images/mhuzo/coffee.png", tag: "Comfort" },
       ],
     },
   };
@@ -652,46 +436,45 @@ function MenuSection() {
   const currentMenu = menuData[activeTab];
 
   return (
-    <RevealSection id="menu" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-warm-white relative">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+    <RevealSection id="menu" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-seashell relative">
+      <div className="sand-pattern absolute inset-0 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-12">
-          <ArabesqueDivider />
-          <span className="font-body text-sm font-bold text-maroon tracking-[0.15em] uppercase">
+          <BohoDivider className="mb-3" />
+          <span className="font-body text-sm font-bold text-ocean tracking-[0.15em] uppercase">
             Our Menu
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-espresso mt-2 mb-4">
-            Flavors That <span className="text-maroon">Never Sleep</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-deep-sea mt-2 mb-4">
+            Beachside <span className="text-coral">Bites</span>
           </h2>
-          <p className="font-body text-espresso/55 text-lg max-w-2xl mx-auto">
-            From sunrise chai to midnight shawarma — our kitchen never stops.
+          <p className="font-body text-driftwood/70 text-lg max-w-2xl mx-auto">
+            Simple, fresh, and made with love — just like a Goan beach shack should be.
           </p>
         </div>
 
-        {/* Tab Switcher */}
+        {/* Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="bg-sand/50 rounded-full p-1.5 flex flex-wrap justify-center gap-1">
-            {(
-              Object.entries(menuData) as [keyof typeof menuData, (typeof menuData)["breakfast"]][]
-            ).map(([key, data]) => (
-              <button
-                key={key}
-                onClick={() => setActiveTab(key)}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-full font-body font-bold text-xs sm:text-sm transition-all duration-300 ${
-                  activeTab === key
-                    ? "bg-maroon text-warm-white shadow-lg shadow-maroon/20"
-                    : "text-espresso/60 hover:text-espresso"
-                }`}
-              >
-                <data.icon size={15} />
-                <span className="hidden sm:inline">{data.title}</span>
-                <span className="sm:hidden">{data.title.split(" ")[0]}</span>
-              </button>
-            ))}
+          <div className="bg-hammock/60 rounded-full p-1.5 flex gap-1">
+            {(Object.entries(menuData) as [keyof typeof menuData, (typeof menuData)["bites"]][]).map(
+              ([key, data]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full font-body font-bold text-xs sm:text-sm transition-all duration-300 ${
+                    activeTab === key
+                      ? "bg-ocean text-seashell shadow-lg shadow-ocean/20"
+                      : "text-driftwood/60 hover:text-deep-sea"
+                  }`}
+                >
+                  <data.icon size={15} />
+                  {data.title}
+                </button>
+              )
+            )}
           </div>
         </div>
 
-        {/* Menu Grid */}
+        {/* Grid */}
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 20 }}
@@ -714,151 +497,130 @@ function MenuSection() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 {item.tag && (
-                  <div className="absolute top-3 right-3 bg-maroon text-warm-white px-3 py-1 rounded-full text-xs font-bold font-body">
+                  <div className="absolute top-3 right-3 bg-ocean text-seashell px-3 py-1 rounded-full text-xs font-bold font-body">
                     {item.tag}
                   </div>
                 )}
               </div>
               <div className="p-5">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-display font-bold text-espresso text-lg">{item.name}</h3>
-                  <span className="font-body font-bold text-maroon text-lg">{item.price}</span>
+                  <h3 className="font-body font-bold text-deep-sea text-base">{item.name}</h3>
+                  <span className="font-body font-bold text-coral text-lg">{item.price}</span>
                 </div>
-                <p className="font-body text-espresso/45 text-sm">{item.desc}</p>
+                <p className="font-body text-driftwood/50 text-sm">{item.desc}</p>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* CTA Row */}
+        {/* Order Links */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
           <a
-            href="https://www.zomato.com/pune/cafe-ibrahim-viman-nagar"
+            href="https://www.instagram.com/cafemhuzogoa/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-body font-bold text-maroon hover:text-maroon-dark transition-colors group"
+            className="inline-flex items-center gap-2 font-body font-bold text-ocean hover:text-ocean-dark transition-colors group"
           >
-            View Full Menu on Zomato
+            Full Menu on Instagram
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
-          <span className="hidden sm:block text-espresso/20">|</span>
-          <a
-            href="https://www.swiggy.com/city/pune/cafe-ibrahim-viman-nagar-rest989024"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-body font-bold text-teal hover:text-teal-dark transition-colors group"
-          >
-            Order on Swiggy
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+          <span className="hidden sm:block text-driftwood/20">|</span>
+          <span className="font-body text-sm text-driftwood/50">Also available on Swiggy & Zomato</span>
         </div>
       </div>
     </RevealSection>
   );
 }
 
-/* ─── Late Night Section ─── */
-function LateNight() {
+/* ─── Experiences Section ─── */
+function Experiences() {
+  const experiences = [
+    {
+      icon: BookOpen,
+      title: "Book Cafe",
+      desc: "Shelves stacked with books for all ages. Grab a corner, pick a book, and lose yourself. Reading is always free here.",
+      img: "/images/mhuzo/books.png",
+      color: "ocean",
+    },
+    {
+      icon: Music,
+      title: "Open Mic Nights",
+      desc: "Poetry, stand-up, acoustic jams — our stage is open for everyone. Check our Instagram for the next event!",
+      img: "/images/mhuzo/openmic.png",
+      color: "coral",
+    },
+    {
+      icon: Palette,
+      title: "Art Workshops",
+      desc: "Boho painting, Warli art, crochet, rock balancing — creative workshops every weekend. All materials provided.",
+      img: "/images/mhuzo/swings.png",
+      color: "sunflower",
+    },
+    {
+      icon: Armchair,
+      title: "Unique Seating",
+      desc: "Swings, bunk beds, bean bags, floor cushions — there's no ordinary chair here. Sit your way, stay your way.",
+      img: "/images/mhuzo/bunkbeds.png",
+      color: "palm",
+    },
+  ];
+
   return (
-    <RevealSection id="latenight" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Dark Background */}
-      <div className="absolute inset-0 bg-espresso" />
-      <div
-        className="absolute inset-0 opacity-25 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/ibrahim/late-night.png')" }}
-      />
+    <RevealSection id="experiences" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-tide relative">
+      <div className="wave-pattern absolute inset-0 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative">
+        <div className="text-center mb-14">
+          <BohoDivider className="mb-3" />
+          <span className="font-body text-sm font-bold text-palm tracking-[0.15em] uppercase">
+            More Than Coffee
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-deep-sea mt-2 mb-4">
+            Experiences <span className="text-coral">That Stay</span>
+          </h2>
+          <p className="font-body text-driftwood/70 text-lg max-w-2xl mx-auto">
+            We&apos;re not just a cafe — we&apos;re a creative space, a community,
+            and your weekend escape plan.
+          </p>
+        </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left: Content */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-[2px] bg-gold" />
-              <span className="font-body text-sm font-bold text-gold tracking-[0.15em] uppercase">
-                Late Night Legend
-              </span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-warm-white mb-6 leading-tight">
-              Cravings Don&apos;t
-              <br />
-              <span className="text-gold neon-pulse">Keep Hours</span>
-            </h2>
-            <p className="font-body text-warm-white/65 text-lg leading-relaxed mb-8">
-              When the rest of Pune goes to sleep, Cafe Ibrahim lights up.
-              Whether it&apos;s a post-shift meal, a midnight shawarma run, or
-              a 3 AM chai with friends — we&apos;re always here. No closing
-              time. No last order. Just good food, always.
-            </p>
-
-            {/* Features */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {[
-                {
-                  icon: Moon,
-                  label: "Open 24/7",
-                  desc: "No closing time, ever",
-                },
-                {
-                  icon: Flame,
-                  label: "Fresh at 3 AM",
-                  desc: "Hot food, any hour",
-                },
-                {
-                  icon: Users,
-                  label: "Night Owls Welcome",
-                  desc: "Your late-night spot",
-                },
-                {
-                  icon: Bike,
-                  label: "Late Night Delivery",
-                  desc: "Via Swiggy & Zomato",
-                },
-              ].map((item, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={exp.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
+            >
+              <div className="relative h-44 overflow-hidden">
+                <img
+                  src={exp.img}
+                  alt={exp.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-deep-sea/35 to-transparent" />
                 <div
-                  key={i}
-                  className="bg-warm-white/8 backdrop-blur-sm rounded-2xl p-4 border border-warm-white/8"
+                  className={`absolute bottom-3 left-3 p-2 rounded-xl ${
+                    exp.color === "ocean"
+                      ? "bg-ocean"
+                      : exp.color === "coral"
+                      ? "bg-coral"
+                      : exp.color === "sunflower"
+                      ? "bg-sunflower"
+                      : "bg-palm"
+                  }`}
                 >
-                  <item.icon size={20} className="text-gold mb-2" />
-                  <div className="font-body font-bold text-warm-white text-sm">{item.label}</div>
-                  <div className="font-body text-xs text-warm-white/40 mt-0.5">{item.desc}</div>
+                  <exp.icon size={20} className="text-seashell" />
                 </div>
-              ))}
-            </div>
-
-            <a
-              href="tel:8551061614"
-              className="inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-espresso font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl font-body"
-            >
-              <Phone size={18} />
-              Call Now — We&apos;re Open
-            </a>
-          </div>
-
-          {/* Right: Image */}
-          <div className="relative">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-              className="rounded-3xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="/images/ibrahim/late-night.png"
-                alt="Cafe Ibrahim Late Night"
-                className="w-full h-[400px] sm:h-[500px] object-cover"
-              />
-            </motion.div>
-            {/* 24H Badge */}
-            <motion.div
-              animate={{ scale: [1, 1.08, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute -bottom-4 -left-4 bg-gold rounded-2xl px-5 py-4 shadow-xl"
-            >
-              <div className="font-display text-3xl font-bold text-espresso">24</div>
-              <div className="font-body text-xs font-bold text-espresso/60 uppercase tracking-wider">
-                Hours
+              </div>
+              <div className="p-5">
+                <h3 className="font-body font-bold text-deep-sea text-lg mb-2">{exp.title}</h3>
+                <p className="font-body text-driftwood/55 text-sm leading-relaxed">{exp.desc}</p>
               </div>
             </motion.div>
-          </div>
+          ))}
         </div>
       </div>
     </RevealSection>
@@ -868,25 +630,24 @@ function LateNight() {
 /* ─── Gallery Section ─── */
 function Gallery() {
   const images = [
-    { src: "/images/ibrahim/irani-chai.png", alt: "Irani Chai", span: "col-span-2 row-span-2" },
-    { src: "/images/ibrahim/shawarma.png", alt: "Chicken Shawarma", span: "" },
-    { src: "/images/ibrahim/kheema.png", alt: "Chicken Kheema", span: "" },
-    { src: "/images/ibrahim/biryani.png", alt: "Chicken Biryani", span: "col-span-2" },
-    { src: "/images/ibrahim/bun-maska.png", alt: "Bun Maska", span: "" },
-    { src: "/images/ibrahim/burger.png", alt: "Jumbo Burger", span: "" },
+    { src: "/images/mhuzo/hero.png", alt: "Cafe Mhuzo Goa Interior", span: "col-span-2 row-span-2" },
+    { src: "/images/mhuzo/swings.png", alt: "Swings seating", span: "" },
+    { src: "/images/mhuzo/bunkbeds.png", alt: "Bunk bed area", span: "" },
+    { src: "/images/mhuzo/openmic.png", alt: "Open mic night", span: "col-span-2" },
+    { src: "/images/mhuzo/coffee.png", alt: "Artisan coffee", span: "" },
+    { src: "/images/mhuzo/exterior.png", alt: "Cafe exterior", span: "" },
   ];
 
   return (
-    <RevealSection className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-sand relative">
-      <div className="spice-pattern absolute inset-0 pointer-events-none" />
-      <div className="max-w-7xl mx-auto relative">
+    <RevealSection className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-hammock relative">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <ArabesqueDivider />
-          <span className="font-body text-sm font-bold text-maroon tracking-[0.15em] uppercase">
+          <BohoDivider className="mb-3" />
+          <span className="font-body text-sm font-bold text-ocean tracking-[0.15em] uppercase">
             Gallery
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-espresso mt-2">
-            A Taste Through <span className="text-maroon">Images</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-deep-sea mt-2">
+            The <span className="text-coral">Mhuzo</span> Vibe
           </h2>
         </div>
 
@@ -914,111 +675,18 @@ function Gallery() {
   );
 }
 
-/* ─── Reviews Section ─── */
-function Reviews() {
-  const reviews = [
-    {
-      text: "The best late night food! I am a chef and we don't have many options for dinner after our late shifts, and this place has become a go-to for the best meal.",
-      author: "Chef Review",
-      platform: "Zomato",
-      rating: 5,
-    },
-    {
-      text: "There are very few places open at night who offer food with great taste. All the dishes served at this cafe are up to the mark.",
-      author: "Regular Customer",
-      platform: "Zomato",
-      rating: 5,
-    },
-    {
-      text: "Irani chai is highly recommended. Chicken Peri Peri Shawarma and Classic Shawarma were absolutely loved. Great value for money!",
-      author: "Food Lover",
-      platform: "JustDial",
-      rating: 5,
-    },
-  ];
-
-  return (
-    <RevealSection className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 section-gradient-cream relative">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <ArabesqueDivider />
-          <span className="font-body text-sm font-bold text-maroon tracking-[0.15em] uppercase">
-            Reviews
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-espresso mt-2">
-            What People <span className="text-maroon">Say</span>
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((review, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 card-lift"
-            >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: review.rating }).map((_, j) => (
-                  <Star key={j} size={16} className="text-gold fill-gold" />
-                ))}
-              </div>
-              <p className="font-body text-espresso/70 text-sm leading-relaxed mb-4 italic">
-                &quot;{review.text}&quot;
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="font-body font-bold text-espresso text-sm">{review.author}</span>
-                <span className="font-body text-xs text-espresso/40 bg-sand/50 px-3 py-1 rounded-full">
-                  {review.platform}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Overall Rating */}
-        <div className="text-center mt-10">
-          <div className="inline-flex items-center gap-6 bg-white rounded-2xl px-8 py-5 shadow-md">
-            <div>
-              <div className="font-display text-4xl font-bold text-maroon">4.6</div>
-              <div className="flex gap-0.5 mt-1">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} size={14} className={s <= 4 ? "text-gold fill-gold" : "text-gold/40 fill-gold/40"} />
-                ))}
-              </div>
-            </div>
-            <div className="w-px h-12 bg-sand" />
-            <div className="text-left">
-              <div className="font-body font-bold text-espresso text-sm">599+ Reviews</div>
-              <div className="font-body text-xs text-espresso/40">on JustDial</div>
-            </div>
-            <div className="w-px h-12 bg-sand" />
-            <div className="text-left">
-              <div className="font-body font-bold text-espresso text-sm">4.2 Rating</div>
-              <div className="font-body text-xs text-espresso/40">on Zomato</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </RevealSection>
-  );
-}
-
 /* ─── Visit Us Section ─── */
 function VisitUs() {
   return (
-    <RevealSection id="visit" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-warm-white relative">
+    <RevealSection id="visit" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-seashell relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <ArabesqueDivider />
-          <span className="font-body text-sm font-bold text-maroon tracking-[0.15em] uppercase">
+          <BohoDivider className="mb-3" />
+          <span className="font-body text-sm font-bold text-ocean tracking-[0.15em] uppercase">
             Find Us
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-espresso mt-2 mb-4">
-            Come Visit <span className="text-maroon">Ibrahim</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-deep-sea mt-2 mb-4">
+            Come Hang <span className="text-coral">With Us</span>
           </h2>
         </div>
 
@@ -1026,102 +694,93 @@ function VisitUs() {
           {/* Map */}
           <div className="rounded-2xl overflow-hidden shadow-xl h-[400px] sm:h-[480px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.1!2d73.9041!3d18.5703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c14dbe56d905%3A0x37914994afe54ac5!2sCAFE%20IBRAHIM!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.0!2d73.8422!3d18.5181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1962a2a4a4b%3A0x3f0c1ea8881b6526!2sCAFE%20MHUZO%20GOA!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Cafe Ibrahim Location"
+              title="Cafe Mhuzo Goa Location"
             />
           </div>
 
           {/* Contact Info */}
           <div className="space-y-5">
-            {/* Address */}
-            <div className="bg-cream rounded-2xl p-5 flex gap-4 items-start">
-              <div className="p-3 rounded-xl bg-maroon/10 shrink-0">
-                <MapPin size={20} className="text-maroon" />
+            <div className="bg-tide rounded-2xl p-5 flex gap-4 items-start">
+              <div className="p-3 rounded-xl bg-ocean/10 shrink-0">
+                <MapPin size={20} className="text-ocean" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-espresso text-lg mb-1">Address</h3>
-                <p className="font-body text-espresso/55 text-sm">
-                  Survey 230 B/2, Shop 2, Near Majjid,
+                <h3 className="font-body font-bold text-deep-sea text-lg mb-1">Address</h3>
+                <p className="font-body text-driftwood/60 text-sm">
+                  1229, Fergusson College Road,
                   <br />
-                  Sanjay Park, IAF Station, Viman Nagar, Pune
+                  Shivajinagar, Pune 411004
                 </p>
               </div>
             </div>
 
-            {/* Timings */}
-            <div className="bg-cream rounded-2xl p-5 flex gap-4 items-start">
-              <div className="p-3 rounded-xl bg-gold/15 shrink-0">
-                <Clock size={20} className="text-gold-dark" />
+            <div className="bg-tide rounded-2xl p-5 flex gap-4 items-start">
+              <div className="p-3 rounded-xl bg-sunflower/15 shrink-0">
+                <Clock size={20} className="text-sunflower-dark" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-espresso text-lg mb-1">Timings</h3>
-                <div className="font-body text-espresso/55 text-sm">
-                  <p className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 rounded-full bg-teal animate-pulse" />
-                    <span className="font-semibold text-espresso/75">Open 24 Hours</span> — We never close!
+                <h3 className="font-body font-bold text-deep-sea text-lg mb-1">Timings</h3>
+                <div className="font-body text-driftwood/60 text-sm space-y-1">
+                  <p>
+                    <span className="font-semibold text-deep-sea/70">Mon – Wed, Fri – Sun:</span> 10:00 AM – 10:00 PM
+                  </p>
+                  <p>
+                    <span className="font-semibold text-coral">Thursday:</span> Closed
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Contact */}
-            <div className="bg-cream rounded-2xl p-5 flex gap-4 items-start">
-              <div className="p-3 rounded-xl bg-teal/10 shrink-0">
-                <Phone size={20} className="text-teal" />
+            <div className="bg-tide rounded-2xl p-5 flex gap-4 items-start">
+              <div className="p-3 rounded-xl bg-coral/10 shrink-0">
+                <Phone size={20} className="text-coral" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-espresso text-lg mb-1">Contact</h3>
+                <h3 className="font-body font-bold text-deep-sea text-lg mb-1">Contact</h3>
                 <a
-                  href="tel:8551061614"
-                  className="font-body text-maroon font-semibold text-sm hover:text-maroon-dark transition-colors"
+                  href="tel:9511898593"
+                  className="font-body text-ocean font-semibold text-sm hover:text-ocean-dark transition-colors"
                 >
-                  +91 85510 61614
+                  +91 95118 98593
                 </a>
-                <p className="font-body text-espresso/40 text-xs mt-1">
-                  Call or WhatsApp for orders & reservations
+                <p className="font-body text-driftwood/40 text-xs mt-1">
+                  Call or WhatsApp for reservations & events
                 </p>
               </div>
             </div>
 
-            {/* Social & Order Links */}
-            <div className="bg-cream rounded-2xl p-5">
-              <h3 className="font-display font-bold text-espresso text-lg mb-4">
-                Order Online & Follow
-              </h3>
+            <div className="bg-tide rounded-2xl p-5">
+              <h3 className="font-body font-bold text-deep-sea text-lg mb-4">Follow & Order</h3>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://www.instagram.com/cafeibrahim2020"
+                  href="https://www.instagram.com/cafemhuzogoa/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white px-4 py-2 rounded-full font-body font-bold text-xs hover:shadow-lg transition-shadow"
                 >
                   <Instagram size={14} />
-                  @cafeibrahim2020
+                  @cafemhuzogoa
                 </a>
                 <a
-                  href="https://www.zomato.com/pune/cafe-ibrahim-viman-nagar"
+                  href="https://www.facebook.com/100077467790516"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full font-body font-bold text-xs hover:shadow-lg transition-shadow"
+                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-full font-body font-bold text-xs hover:shadow-lg transition-shadow"
                 >
-                  <Utensils size={14} />
-                  Zomato
+                  <Users size={14} />
+                  Facebook
                 </a>
-                <a
-                  href="https://www.swiggy.com/city/pune/cafe-ibrahim-viman-nagar-rest989024"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-full font-body font-bold text-xs hover:shadow-lg transition-shadow"
-                >
+                <span className="flex items-center gap-2 bg-driftwood/10 text-driftwood px-4 py-2 rounded-full font-body font-bold text-xs">
                   <Bike size={14} />
-                  Swiggy
-                </a>
+                  Swiggy & Zomato
+                </span>
               </div>
             </div>
           </div>
@@ -1134,44 +793,37 @@ function VisitUs() {
 /* ─── Footer ─── */
 function Footer() {
   return (
-    <footer className="bg-espresso text-warm-white/80 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-deep-sea text-seashell/80 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <Coffee size={22} className="text-gold" />
-              <div>
-                <span className="font-display text-xl font-bold text-warm-white">Cafe Ibrahim</span>
-              </div>
+              <TreePalm size={22} className="text-sunflower" />
+              <span className="font-display text-xl text-seashell">Mhuzo Goa</span>
             </div>
-            <p className="font-body text-sm text-warm-white/40 leading-relaxed mb-4">
-              Authentic Irani cafe in Viman Nagar, Pune. Open 24 hours —
-              because cravings don&apos;t keep hours.
+            <p className="font-body text-sm text-seashell/35 leading-relaxed mb-4">
+              A Goan-styled book cafe on FC Road, Pune. Swings, bunk beds,
+              bean bags, books & beach vibes — &ldquo;Mhuzo Goa&rdquo; means My Goa.
             </p>
-            <div className="inline-flex items-center gap-2 bg-gold/15 rounded-full px-4 py-1.5">
-              <Moon size={12} className="text-gold" />
-              <span className="font-body text-xs font-bold text-gold">Open 24 Hours</span>
+            <div className="inline-flex items-center gap-2 bg-sunflower/15 rounded-full px-4 py-1.5">
+              <Baby size={12} className="text-sunflower" />
+              <span className="font-body text-xs font-bold text-sunflower">Pet & Kid Friendly</span>
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="font-display font-bold text-warm-white text-sm mb-4 uppercase tracking-wider">
+            <h4 className="font-body font-bold text-seashell text-sm mb-4 uppercase tracking-wider">
               Quick Links
             </h4>
             <ul className="space-y-2">
               {[
-                { label: "Our Story", href: "#story" },
+                { label: "Our Vibe", href: "#story" },
                 { label: "Menu", href: "#menu" },
-                { label: "Late Night", href: "#latenight" },
+                { label: "Experiences", href: "#experiences" },
                 { label: "Visit Us", href: "#visit" },
               ].map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-warm-white/40 hover:text-gold transition-colors"
-                  >
+                  <a href={link.href} className="font-body text-sm text-seashell/35 hover:text-sunflower transition-colors">
                     {link.label}
                   </a>
                 </li>
@@ -1179,67 +831,52 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Must Try */}
           <div>
-            <h4 className="font-display font-bold text-warm-white text-sm mb-4 uppercase tracking-wider">
-              Must Try
+            <h4 className="font-body font-bold text-seashell text-sm mb-4 uppercase tracking-wider">
+              Unique Features
             </h4>
             <ul className="space-y-2">
-              {[
-                "Irani Chai",
-                "Chicken Shawarma",
-                "Bun Maska Jam",
-                "Chicken Kheema",
-                "Chicken Biryani",
-              ].map((dish) => (
-                <li key={dish} className="font-body text-sm text-warm-white/40">
-                  {dish}
-                </li>
-              ))}
+              {["Swings & Bunk Beds", "Book Library", "Open Mic Events", "Art Workshops", "Mini Foot Pool", "Free Guitars"].map(
+                (f) => (
+                  <li key={f} className="font-body text-sm text-seashell/35">
+                    {f}
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-display font-bold text-warm-white text-sm mb-4 uppercase tracking-wider">
+            <h4 className="font-body font-bold text-seashell text-sm mb-4 uppercase tracking-wider">
               Get in Touch
             </h4>
             <div className="space-y-3">
-              <a
-                href="tel:8551061614"
-                className="flex items-center gap-2 font-body text-sm text-warm-white/40 hover:text-gold transition-colors"
-              >
+              <a href="tel:9511898593" className="flex items-center gap-2 font-body text-sm text-seashell/35 hover:text-sunflower transition-colors">
                 <Phone size={14} />
-                +91 85510 61614
+                +91 95118 98593
               </a>
-              <a
-                href="https://www.instagram.com/cafeibrahim2020"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 font-body text-sm text-warm-white/40 hover:text-gold transition-colors"
-              >
+              <a href="https://www.instagram.com/cafemhuzogoa/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-body text-sm text-seashell/35 hover:text-sunflower transition-colors">
                 <Instagram size={14} />
-                @cafeibrahim2020
+                @cafemhuzogoa
               </a>
-              <div className="flex items-start gap-2 font-body text-sm text-warm-white/40">
+              <div className="flex items-start gap-2 font-body text-sm text-seashell/35">
                 <MapPin size={14} className="shrink-0 mt-0.5" />
-                Sanjay Park, Viman Nagar, Pune
+                1229, FC Road, Shivajinagar, Pune
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-warm-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-body text-xs text-warm-white/25">
-            © {new Date().getFullYear()} Cafe Ibrahim. All rights reserved.
+        <div className="border-t border-seashell/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="font-body text-xs text-seashell/20">
+            © {new Date().getFullYear()} Cafe Mhuzo Goa. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
-            <Coffee size={12} className="text-gold/25" />
-            <span className="font-body text-xs text-warm-white/25">
-              Open 24 Hours • Viman Nagar, Pune
+            <Waves size={12} className="text-ocean-light/25" />
+            <span className="font-body text-xs text-seashell/20">
+              Mhuzo Goa — My Goa ♡ FC Road, Pune
             </span>
-            <Coffee size={12} className="text-gold/25" />
+            <TreePalm size={12} className="text-sunflower/25" />
           </div>
         </div>
       </div>
@@ -1248,17 +885,16 @@ function Footer() {
 }
 
 /* ─── Main Page ─── */
-export default function CafeIbrahimPage() {
+export default function CafeMhuzoGoaPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream">
+    <div className="min-h-screen flex flex-col bg-sand">
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <OurStory />
+        <OurVibe />
         <MenuSection />
-        <LateNight />
+        <Experiences />
         <Gallery />
-        <Reviews />
         <VisitUs />
       </main>
       <Footer />

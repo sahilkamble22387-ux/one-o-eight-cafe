@@ -1,53 +1,54 @@
 import type { Metadata } from "next";
-import { Amiri, Outfit } from "next/font/google";
+import { Pacifico, Poppins } from "next/font/google";
 import "./globals.css";
 
-const amiri = Amiri({
-  variable: "--font-amiri",
-  weight: ["400", "700"],
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Cafe Ibrahim | Authentic Irani Cafe in Viman Nagar, Pune — Open 24 Hours",
+  title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe — FC Road",
   description:
-    "Cafe Ibrahim — Pune's beloved 24-hour Irani cafe in Viman Nagar. Famous for Irani Chai, Chicken Shawarma, Bun Maska, Kheema Pav, Biryani & more. Late night cravings? We're always open.",
+    "Cafe Mhuzo Goa — 'My Goa' in Konkani. Pune's beloved Goan-styled book cafe on FC Road with swings, bunk beds, bean bags, books, open mic events & beach vibes. Great coffee, sandwiches, fries & more.",
   keywords: [
-    "Cafe Ibrahim",
-    "Cafe Ibrahim Pune",
-    "Irani Cafe Pune",
-    "Viman Nagar Cafe",
-    "24 Hour Cafe Pune",
-    "Late Night Food Pune",
-    "Shawarma Pune",
-    "Irani Chai Pune",
-    "Bun Maska Pune",
-    "Kheema Pav Pune",
-    "Late Night Cafe Viman Nagar",
+    "Cafe Mhuzo Goa",
+    "Cafe Mhuzo",
+    "Book Cafe Pune",
+    "Goan Cafe Pune",
+    "FC Road Cafe",
+    "Boho Cafe Pune",
+    "Pet Friendly Cafe Pune",
+    "Open Mic Pune",
+    "Best Cafe FC Road",
+    "Swings Cafe Pune",
+    "Bunk Bed Cafe",
   ],
-  authors: [{ name: "Cafe Ibrahim" }],
+  authors: [{ name: "Cafe Mhuzo Goa" }],
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Cafe Ibrahim | Authentic Irani Cafe — Open 24 Hours",
+    title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe",
     description:
-      "Pune's beloved 24-hour Irani cafe. Famous for Irani Chai, Shawarma, Bun Maska & more.",
+      "Goan-styled book cafe on FC Road. Swings, bunk beds, books, beach vibes & great food.",
     type: "website",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cafe Ibrahim | Authentic Irani Cafe — Open 24 Hours",
+    title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe",
     description:
-      "Pune's beloved 24-hour Irani cafe. Famous for Irani Chai, Shawarma, Bun Maska & more.",
+      "Goan-styled book cafe on FC Road. Swings, bunk beds, books, beach vibes & great food.",
   },
 };
 
@@ -59,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${amiri.variable} ${outfit.variable} antialiased bg-background text-foreground`}
+        className={`${pacifico.variable} ${poppins.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>
