@@ -29,25 +29,16 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps --no-fund
 
+      - name: Prep image paths in source code
+        run: |
+          echo "Prepending /$SITE_SLUG to image paths in src/..."
+          find src -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.css" -o -name "*.js" \) | while read f; do
+            sed -i "s|/images/|/$SITE_SLUG/images/|g" "$f"
+          done
+          echo "Done prepending."
+
       - name: Build static export
         run: npm run build
-
-      - name: Fix image paths for GitHub Pages
-        run: |
-          SLUG="one-o-eight-cafe"
-          echo "Patching image paths for /$SLUG/..."
-          # Fix url('/images/...) and url("/images/...) in JS bundles
-          find out/_next -name "*.js" -type f | while read f; do
-            sed -i "s|url('/images/|url('/$SLUG/images/|g" "$f"
-            sed -i 's|url("/images/|url("/'"one-o-eight-cafe"'/images/|g' "$f"
-            sed -i "s|url(/images/|url(/$SLUG/images/|g" "$f"
-          done
-          # Fix src="/images/ in HTML files
-          find out -name "*.html" -type f | while read f; do
-            sed -i "s|src=\"/images/|src=\"/$SLUG/images/|g" "$f"
-            sed -i "s|href=\"/images/|href=\"/$SLUG/images/|g" "$f"
-          done
-          echo "Done patching."
 
       - uses: actions/upload-pages-artifact@v3
         with:
