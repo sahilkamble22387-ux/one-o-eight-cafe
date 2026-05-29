@@ -6,10 +6,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-karla);
-  --font-heading: var(--font-lora);
-  --font-lora: var(--font-lora);
-  --font-karla: var(--font-karla);
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-fraunces);
+  --font-fraunces: var(--font-fraunces);
+  --font-jakarta: var(--font-jakarta);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,53 +44,51 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Cafe Kathaa — Literary Warmth */
-  --color-plum: #5B2848;
-  --color-plum-dark: #3D1A30;
-  --color-plum-light: #7A3D62;
-  --color-honey: #C8933C;
-  --color-honey-dark: #A87828;
-  --color-honey-light: #DBA854;
-  --color-sage: #5B8F6B;
-  --color-sage-dark: #437050;
-  --color-sage-light: #7BAF8B;
-  --color-blush: #D4889B;
-  --color-blush-dark: #B86E82;
-  --color-blush-light: #E4A5B5;
-  --color-cream: #FAF5ED;
-  --color-linen: #F5EDE3;
-  --color-mauve: #F0E8ED;
-  --color-espresso: #1A0F14;
-  --color-walnut: #3C2A33;
-  --color-warm-gray: #8B7D85;
-  --color-parchment: #F8F2E8;
+  /* One O Eight — Modern Australian Organic */
+  --color-clay: #B8734C;
+  --color-clay-dark: #955D3A;
+  --color-clay-light: #D4956E;
+  --color-eucalyptus: #6B8F71;
+  --color-eucalyptus-dark: #4E7054;
+  --color-eucalyptus-light: #8BB091;
+  --color-sand: #F5EFE6;
+  --color-linen: #FAF7F2;
+  --color-espresso: #1E1512;
+  --color-walnut: #5C4A3E;
+  --color-warm-gray: #9B8E84;
+  --color-rose: #D4A6A0;
+  --color-rose-dark: #B88A84;
+  --color-rose-light: #E4C0BA;
+  --color-gold: #D4B87A;
+  --color-gold-dark: #B89A5E;
+  --color-gold-light: #E4CE9A;
 }
 
 :root {
   --radius: 0.75rem;
-  --background: #FAF5ED;
-  --foreground: #1A0F14;
+  --background: #FAF7F2;
+  --foreground: #1E1512;
   --card: #FFFFFF;
-  --card-foreground: #1A0F14;
+  --card-foreground: #1E1512;
   --popover: #FFFFFF;
-  --popover-foreground: #1A0F14;
-  --primary: #5B2848;
-  --primary-foreground: #FAF5ED;
-  --secondary: #F0E8ED;
-  --secondary-foreground: #1A0F14;
-  --muted: #F5EDE3;
-  --muted-foreground: #8B7D85;
-  --accent: #C8933C;
-  --accent-foreground: #1A0F14;
+  --popover-foreground: #1E1512;
+  --primary: #B8734C;
+  --primary-foreground: #FAF7F2;
+  --secondary: #F5EFE6;
+  --secondary-foreground: #1E1512;
+  --muted: #F0EBE3;
+  --muted-foreground: #9B8E84;
+  --accent: #6B8F71;
+  --accent-foreground: #FAF7F2;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #E5DDD3;
-  --input: #E5DDD3;
-  --ring: #5B2848;
-  --chart-1: #5B2848;
-  --chart-2: #C8933C;
-  --chart-3: #5B8F6B;
-  --chart-4: #D4889B;
-  --chart-5: #8B7D85;
+  --border: #E8E0D5;
+  --input: #E8E0D5;
+  --ring: #B8734C;
+  --chart-1: #B8734C;
+  --chart-2: #6B8F71;
+  --chart-3: #D4A6A0;
+  --chart-4: #D4B87A;
+  --chart-5: #9B8E84;
 }
 
 @layer base {
@@ -105,90 +103,61 @@
   }
 }
 
-/* Custom Scrollbar — Literary Warmth */
+/* Custom Scrollbar — Australian Organic */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF5ED;
+  background: #FAF7F2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #5B2848, #C8933C);
+  background: linear-gradient(to bottom, #B8734C, #6B8F71);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #3D1A30, #5B2848);
+  background: linear-gradient(to bottom, #955D3A, #4E7054);
 }
 
-/* Floating Page Particles */
-@keyframes pageFloat {
+/* Floating Eucalyptus Leaves */
+@keyframes leafDrift {
   0% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0) translateX(0) rotate(0deg);
     opacity: 0;
   }
   10% {
-    opacity: 0.25;
+    opacity: 0.2;
   }
   50% {
-    transform: translateY(-60px) rotate(15deg);
-    opacity: 0.15;
+    transform: translateY(-50px) translateX(20px) rotate(25deg);
+    opacity: 0.12;
   }
   100% {
-    transform: translateY(-120px) rotate(-10deg);
+    transform: translateY(-100px) translateX(-15px) rotate(-15deg);
     opacity: 0;
   }
 }
 
-.page-float-1 {
-  animation: pageFloat 6s ease-in-out infinite;
-}
-
-.page-float-2 {
-  animation: pageFloat 7.5s ease-in-out infinite 1s;
-}
-
-.page-float-3 {
-  animation: pageFloat 5.5s ease-in-out infinite 2s;
-}
-
-.page-float-4 {
-  animation: pageFloat 8s ease-in-out infinite 0.5s;
-}
-
-.page-float-5 {
-  animation: pageFloat 6.5s ease-in-out infinite 1.5s;
-}
+.leaf-1 { animation: leafDrift 7s ease-in-out infinite; }
+.leaf-2 { animation: leafDrift 9s ease-in-out infinite 1.5s; }
+.leaf-3 { animation: leafDrift 6s ease-in-out infinite 2.5s; }
+.leaf-4 { animation: leafDrift 8s ease-in-out infinite 0.8s; }
+.leaf-5 { animation: leafDrift 7.5s ease-in-out infinite 2s; }
 
 /* Warm Glow Pulse */
-@keyframes warmGlowPulse {
+@keyframes warmGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(200, 147, 60, 0.35);
+    box-shadow: 0 0 0 0 rgba(184, 115, 76, 0.35);
   }
   50% {
-    box-shadow: 0 0 28px 8px rgba(200, 147, 60, 0.12);
+    box-shadow: 0 0 28px 8px rgba(184, 115, 76, 0.12);
   }
 }
 
-.warm-glow-pulse {
-  animation: warmGlowPulse 2.5s ease-in-out infinite;
-}
-
-/* Quill Float */
-@keyframes quillFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(-5deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(5deg);
-  }
-}
-
-.quill-float {
-  animation: quillFloat 3s ease-in-out infinite;
-  transform-origin: top center;
+.warm-glow {
+  animation: warmGlow 2.5s ease-in-out infinite;
 }
 
 /* Scroll indicator */
@@ -207,14 +176,14 @@
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
-/* Hero gradient overlay — Literary Evening */
-.hero-gradient-kathaa {
+/* Hero gradient overlay — Morning Warmth */
+.hero-gradient-108 {
   background: linear-gradient(
     to bottom,
-    rgba(26, 15, 20, 0.75) 0%,
-    rgba(61, 26, 48, 0.5) 30%,
-    rgba(26, 15, 20, 0.4) 55%,
-    rgba(26, 15, 20, 0.85) 100%
+    rgba(30, 21, 18, 0.7) 0%,
+    rgba(92, 74, 62, 0.35) 30%,
+    rgba(30, 21, 18, 0.3) 55%,
+    rgba(30, 21, 18, 0.8) 100%
   );
 }
 
@@ -225,129 +194,106 @@
 
 .card-lift:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(91, 40, 72, 0.1), 0 4px 12px rgba(200, 147, 60, 0.12);
+  box-shadow: 0 16px 40px rgba(184, 115, 76, 0.1), 0 4px 12px rgba(107, 143, 113, 0.12);
 }
 
 /* Text shadow for headings over images */
-.text-shadow-literary {
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7), 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 60px rgba(91, 40, 72, 0.3);
+.text-shadow-organic {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65), 0 4px 24px rgba(0, 0, 0, 0.45), 0 0 50px rgba(30, 21, 18, 0.3);
 }
 
-/* Section separator — Ink style */
+/* Section separator — Organic style */
 .section-separator {
   width: 80px;
   height: 2px;
-  background: linear-gradient(to right, transparent, #5B2848, #C8933C, #5B2848, transparent);
+  background: linear-gradient(to right, transparent, #B8734C, #6B8F71, #B8734C, transparent);
 }
 
 /* Custom font classes */
 .font-display {
-  font-family: var(--font-lora), Georgia, serif;
+  font-family: var(--font-fraunces), Georgia, serif;
 }
 
 .font-body {
-  font-family: var(--font-karla), system-ui, sans-serif;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
 }
 
 /* Subtle gradient backgrounds */
-.section-gradient-cream {
-  background: linear-gradient(180deg, #FAF5ED 0%, #F0E8ED 50%, #FAF5ED 100%);
+.section-gradient-sand {
+  background: linear-gradient(180deg, #FAF7F2 0%, #F0EBE3 50%, #FAF7F2 100%);
 }
 
-.section-gradient-linen {
-  background: linear-gradient(180deg, #F5EDE3 0%, #E8DDD0 50%, #F5EDE3 100%);
+.section-gradient-eucalyptus {
+  background: linear-gradient(180deg, #F0F5F0 0%, #E0EBE2 50%, #F0F5F0 100%);
 }
 
-.section-gradient-mauve {
-  background: linear-gradient(180deg, #F0E8ED 0%, #E0D5DC 50%, #F0E8ED 100%);
+.section-gradient-rose {
+  background: linear-gradient(180deg, #F8F2F0 0%, #F0E6E3 50%, #F8F2F0 100%);
 }
 
-/* Bookshelf pattern */
-.bookshelf-pattern {
+/* Eucalyptus leaf pattern */
+.leaf-pattern {
   opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect x='5' y='5' width='8' height='25' rx='1' fill='%235B2848'/%3E%3Crect x='16' y='5' width='6' height='25' rx='1' fill='%23C8933C'/%3E%3Crect x='25' y='5' width='7' height='25' rx='1' fill='%235B8F6B'/%3E%3Crect x='35' y='5' width='9' height='25' rx='1' fill='%23D4889B'/%3E%3Crect x='47' y='5' width='7' height='25' rx='1' fill='%235B2848'/%3E%3Crect x='5' y='33' width='7' height='22' rx='1' fill='%23D4889B'/%3E%3Crect x='15' y='33' width='9' height='22' rx='1' fill='%235B2848'/%3E%3Crect x='27' y='33' width='6' height='22' rx='1' fill='%23C8933C'/%3E%3Crect x='36' y='33' width='8' height='22' rx='1' fill='%235B8F6B'/%3E%3Crect x='47' y='33' width='8' height='22' rx='1' fill='%235B2848'/%3E%3C/svg%3E");
-  background-size: 60px 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='30' rx='12' ry='22' fill='%236B8F71' transform='rotate(-20 40 30)'/%3E%3Cellipse cx='55' cy='55' rx='10' ry='18' fill='%23B8734C' transform='rotate(15 55 55)'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
 }
 
-/* Parchment dot pattern */
-.parchment-pattern {
-  background-image: radial-gradient(circle, #C8933C 1px, transparent 1px);
+/* Linen dot pattern */
+.linen-pattern {
+  background-image: radial-gradient(circle, #B8734C 1px, transparent 1px);
   background-size: 28px 28px;
   opacity: 0.03;
 }
 
-/* Ink divider */
-.ink-divider {
+/* Organic divider */
+.organic-divider {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
 }
 
-.ink-divider::before,
-.ink-divider::after {
+.organic-divider::before,
+.organic-divider::after {
   content: "";
   width: 50px;
   height: 1px;
-  background: linear-gradient(to right, transparent, #5B2848);
+  background: linear-gradient(to right, transparent, #B8734C);
 }
 
-.ink-divider::after {
-  background: linear-gradient(to left, transparent, #5B2848);
+.organic-divider::after {
+  background: linear-gradient(to left, transparent, #B8734C);
 }
 
-/* Ink quill divider symbol */
-.ink-divider .divider-symbol {
-  color: #C8933C;
+.organic-divider .divider-symbol {
+  color: #6B8F71;
   font-size: 0.875rem;
 }
 
-/* Lamp flicker effect */
-@keyframes lampFlicker {
-  0%, 100% { opacity: 1; }
-  5% { opacity: 0.95; }
-  10% { opacity: 1; }
-  15% { opacity: 0.97; }
-  20% { opacity: 1; }
-  50% { opacity: 0.98; }
-  55% { opacity: 1; }
-}
-
-.lamp-flicker {
-  animation: lampFlicker 4s ease-in-out infinite;
-}
-
-/* Gentle text fade in */
-@keyframes gentleFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Feather float animation */
-@keyframes featherDrift {
-  0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.2;
+/* Breathing animation for badges */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
   }
   50% {
-    transform: translateY(-40px) translateX(15px) rotate(20deg);
-    opacity: 0.1;
-  }
-  100% {
-    transform: translateY(-80px) translateX(-10px) rotate(-15deg);
-    opacity: 0;
+    transform: scale(1.03);
   }
 }
 
-.feather-1 { animation: featherDrift 7s ease-in-out infinite; }
-.feather-2 { animation: featherDrift 9s ease-in-out infinite 1.5s; }
-.feather-3 { animation: featherDrift 6s ease-in-out infinite 3s; }
+.breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Number 108 glow */
+@keyframes numberGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(184, 115, 76, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(184, 115, 76, 0.5), 0 0 60px rgba(212, 184, 122, 0.2);
+  }
+}
+
+.number-glow {
+  animation: numberGlow 3s ease-in-out infinite;
+}
