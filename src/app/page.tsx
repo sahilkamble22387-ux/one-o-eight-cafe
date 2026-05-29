@@ -23,7 +23,7 @@ import {
   Feather,
   Mail,
   Award,
-  ArrowRight,
+
   Leaf,
   Flame,
 } from "lucide-react";
@@ -221,13 +221,13 @@ function Hero() {
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className="inline-flex items-center gap-2 bg-cream/15 backdrop-blur-sm border border-honey/30 rounded-full px-5 py-2 mb-6"
+          className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-5 py-2 mb-6"
         >
-          <Feather size={14} className="text-honey-light" />
-          <span className="text-cream/90 text-sm font-body font-bold tracking-wide">
+          <Feather size={14} className="text-amber-300" />
+          <span className="text-white text-sm font-body font-bold tracking-wide">
             Where Books Meet Gourmet Delights
           </span>
-          <BookOpen size={14} className="text-blush-light" />
+          <BookOpen size={14} className="text-pink-300" />
         </motion.div>
 
         {/* Main Heading */}
@@ -235,7 +235,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream text-shadow-literary leading-[1.1] mb-3"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white text-shadow-literary leading-[1.1] mb-3"
         >
           Cafe Kathaa
         </motion.h1>
@@ -245,7 +245,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="font-body text-honey-light text-lg sm:text-xl tracking-[0.15em] uppercase mb-6"
+          className="font-body text-amber-300 text-lg sm:text-xl tracking-[0.15em] uppercase mb-6"
         >
           कथा — Where Every Meal Tells a Story
         </motion.p>
@@ -255,7 +255,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="font-body text-lg sm:text-xl text-cream/70 max-w-2xl mx-auto mb-8 leading-relaxed"
+          className="font-body text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed"
         >
           A bungalow-style book cafe on FC Road. Curl up with a book, craft your
           next idea, or savour handcrafted coffee & gourmet food in our cozy corner
@@ -278,9 +278,9 @@ function Hero() {
           </a>
           <a
             href="#spaces"
-            className="bg-cream/15 hover:bg-cream/25 backdrop-blur-sm border border-cream/30 text-cream px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2 font-body"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/35 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2 font-body"
           >
-            <BookOpen size={20} className="text-honey-light" />
+            <BookOpen size={20} className="text-amber-300" />
             Discover Spaces
           </a>
         </motion.div>
@@ -298,10 +298,10 @@ function Hero() {
             { value: "₹700", label: "For Two" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="font-display text-2xl sm:text-3xl font-bold text-honey">
+              <div className="font-display text-2xl sm:text-3xl font-bold text-amber-300">
                 {stat.value}
               </div>
-              <div className="font-body text-xs sm:text-sm text-cream/40 mt-1">
+              <div className="font-body text-xs sm:text-sm text-white/50 mt-1">
                 {stat.label}
               </div>
             </div>
@@ -315,7 +315,7 @@ function Hero() {
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator"
       >
-        <ChevronDown size={28} className="text-cream/40" />
+        <ChevronDown size={28} className="text-white/50" />
       </motion.div>
     </section>
   );
@@ -525,18 +525,8 @@ function MenuSection() {
           ))}
         </motion.div>
 
-        {/* Order Links */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
-          <a
-            href="https://www.instagram.com/cafekathaa/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-body font-bold text-plum hover:text-plum-dark transition-colors group"
-          >
-            Full Menu on Instagram
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-          <span className="hidden sm:block text-warm-gray/20">|</span>
+        {/* Order Info */}
+        <div className="flex justify-center items-center gap-4 mt-10">
           <span className="font-body text-sm text-warm-gray/50">Also available on Swiggy & Zomato</span>
         </div>
       </div>

@@ -211,10 +211,10 @@
 .hero-gradient-kathaa {
   background: linear-gradient(
     to bottom,
-    rgba(26, 15, 20, 0.55) 0%,
-    rgba(91, 40, 72, 0.25) 30%,
-    rgba(200, 147, 60, 0.08) 60%,
-    rgba(26, 15, 20, 0.7) 100%
+    rgba(26, 15, 20, 0.75) 0%,
+    rgba(61, 26, 48, 0.5) 30%,
+    rgba(26, 15, 20, 0.4) 55%,
+    rgba(26, 15, 20, 0.85) 100%
   );
 }
 
@@ -230,7 +230,7 @@
 
 /* Text shadow for headings over images */
 .text-shadow-literary {
-  text-shadow: 0 2px 10px rgba(26, 15, 20, 0.5), 0 4px 20px rgba(91, 40, 72, 0.3);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7), 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 60px rgba(91, 40, 72, 0.3);
 }
 
 /* Section separator — Ink style */
