@@ -1,54 +1,54 @@
 import type { Metadata } from "next";
-import { Pacifico, Poppins } from "next/font/google";
+import { Lora, Karla } from "next/font/google";
 import "./globals.css";
 
-const pacifico = Pacifico({
-  variable: "--font-pacifico",
-  weight: "400",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["300", "400", "500", "600", "700"],
+const karla = Karla({
+  variable: "--font-karla",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe — FC Road",
+  title: "Cafe Kathaa | Where Books Meet Gourmet Delights — FC Road, Pune",
   description:
-    "Cafe Mhuzo Goa — 'My Goa' in Konkani. Pune's beloved Goan-styled book cafe on FC Road with swings, bunk beds, bean bags, books, open mic events & beach vibes. Great coffee, sandwiches, fries & more.",
+    "Cafe Kathaa — Where stories unfold over handcrafted coffee. A bungalow-style book cafe on FC Road, Pune with co-working space, literary vibes, chicken steaks, fruit pizzas & blueberry cheesecake. Featured on Shark Tank India.",
   keywords: [
-    "Cafe Mhuzo Goa",
-    "Cafe Mhuzo",
+    "Cafe Kathaa",
+    "Cafe कथा",
     "Book Cafe Pune",
-    "Goan Cafe Pune",
     "FC Road Cafe",
-    "Boho Cafe Pune",
-    "Pet Friendly Cafe Pune",
-    "Open Mic Pune",
+    "Co-working Cafe Pune",
+    "Shark Tank Cafe",
     "Best Cafe FC Road",
-    "Swings Cafe Pune",
-    "Bunk Bed Cafe",
+    "Literary Cafe Pune",
+    "Chicken Steak Pune",
+    "Fruit Pizza Pune",
+    "Blueberry Cheesecake Pune",
+    "Laptop Friendly Cafe Pune",
   ],
-  authors: [{ name: "Cafe Mhuzo Goa" }],
+  authors: [{ name: "Cafe Kathaa" }],
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe",
+    title: "Cafe Kathaa | Where Books Meet Gourmet Delights",
     description:
-      "Goan-styled book cafe on FC Road. Swings, bunk beds, books, beach vibes & great food.",
+      "A bungalow-style book cafe on FC Road. Books, co-working, handcrafted coffee & gourmet food.",
     type: "website",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cafe Mhuzo Goa | Pune's Favourite Goan Book Cafe",
+    title: "Cafe Kathaa | Where Books Meet Gourmet Delights",
     description:
-      "Goan-styled book cafe on FC Road. Swings, bunk beds, books, beach vibes & great food.",
+      "A bungalow-style book cafe on FC Road. Books, co-working, handcrafted coffee & gourmet food.",
   },
 };
 
@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pacifico.variable} ${poppins.variable} antialiased bg-background text-foreground`}
+        className={`${lora.variable} ${karla.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>
